@@ -1,0 +1,30 @@
+
+xlsx_sample_num: 5
+
+dataset:
+
+  fixie-ai/librispeech_asr:
+    ratio: 1
+    json_paths:
+      - datasets/jsonl/fixie-ai/librispeech_asr/train.100.clean.jsonl
+
+  mythicinfinity/libritts:
+    ratio: 1
+    json_paths:
+      - datasets/jsonl/mythicinfinity/libritts/train.clean.100.jsonl
+
+  JourneyDB_gen_data_T2I:
+    ratio: 1
+    json_paths:
+      - datasets/jsonl/JourneyDB/JourneyDB.jsonl
+
+  BLIP3o_JourneyDB_GiGaSPK:
+    ratio: 1
+    json_paths:
+      - datasets/jsonl/JourneyDB/BLIP3o_JourneyDB_GiGaSPK_A2I_system_prompt.jsonl
+    prefix_path: datasets/BLIP3o/
+
+  llava_one_vision_svqa:
+    ratio: 1
+    json_paths:
+      - datasets/jsonl/LLaVA-OneVision-Data-TTS-GiGaSPK/allava_instruct_laion4v_system_prompt.jsonl
