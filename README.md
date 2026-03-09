@@ -8,6 +8,24 @@ This repository hosts code of **Omni-Diffusion**, the first any-to-any multimoda
 </p>
 
 
+## Experimental Results
+
+- **Evaluation on visual tasks.**
+<p align="center">
+    <img src="asset/visual_task.png" width="90%" height="60%">
+</p>
+
+- **Evaluation on speech tasks.**
+<p align="center">
+    <img src="asset/speech_task.png" width="90%" height="60%">
+</p>
+
+- **Qualitative Results.**
+<p align="center">
+    <img src="asset/qualitative_results.png" width="90%" height="60%">
+</p>
+
+
 ## Requirements and Installation
 
 ### Prepare Environment
@@ -237,4 +255,17 @@ Evaluate MME
 - Set `mme_dir` to the path of downloaded MME data and evaluation script.
 ```
 ./scripts/deepspeed/evaluate_imageqa_mme.sh model_name_or_path image_tokenizer_path mme_dir
+```
+
+## Citation
+
+If you find our work helpful for your research, please consider citing our work.   
+
+```bibtex
+@article{li2026omni,
+  title={Omni-Diffusion: Unified Multimodal Understanding and Generation with Masked Discrete Diffusion},
+  author={Li, Lijiang and Long, Zuwei and Shen, Yunhang and Gao, Heting and Cao, Haoyu and Sun, Xing and Shan, Caifeng and He, Ran and Fu, Chaoyou},
+  journal={arXiv preprint arXiv:2603.06577},
+  year={2026}
+}
 ```
