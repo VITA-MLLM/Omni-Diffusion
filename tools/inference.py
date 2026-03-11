@@ -12,7 +12,7 @@ from typing import Optional
 import torch
 import tqdm
 from torch import nn
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer, AutoModel
 from transformers.generation import GenerationConfig
 
 import torchaudio
@@ -78,7 +78,7 @@ class S2SInference:
         self, model_name_or_path, audio_tokenizer_path, audio_tokenizer_type, image_tokenizer_path, flow_path=None,
     ):
 
-        config = DreamConfig.from_pretrained(
+        config = AutoConfig.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
         )
@@ -95,7 +95,7 @@ class S2SInference:
         # print(f"{tokenizer=}")
         print(f"{tokenizer.get_chat_template()=}")
 
-        model = DreamModel.from_pretrained(
+        model = AutoModel.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
             device_map=device_map,

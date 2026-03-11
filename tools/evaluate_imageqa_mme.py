@@ -13,7 +13,7 @@ from typing import Optional
 import torch
 from tqdm import tqdm
 from datasets import load_dataset
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, AutoModel
 from transformers.generation import GenerationConfig
 
 from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
@@ -47,7 +47,7 @@ class S2SInference:
         self, model_name_or_path, image_tokenizer_path
     ):
 
-        config = DreamConfig.from_pretrained(
+        config = AutoConfig.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
         )
@@ -58,7 +58,7 @@ class S2SInference:
             chat_template=qwen2_chat_template,
         )
 
-        model = DreamModel.from_pretrained(
+        model = AutoModel.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
             device_map=device_map,

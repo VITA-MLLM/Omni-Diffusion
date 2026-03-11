@@ -12,7 +12,7 @@ from pathlib import Path
 import torch
 import tqdm
 from datasets import load_dataset
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, AutoModel
 from transformers.generation import GenerationConfig
 
 import torchaudio
@@ -83,10 +83,10 @@ class InferenceSampler(torch.utils.data.sampler.Sampler):
 
 class S2SInference:
     def __init__(
-        self, model_name_or_path, audio_tokenizer_path, audio_tokenizer_type, flow_path=None
+        self, model_name_or_path, audio_tokenizer_path, audio_tokenizer_type, flow_path=None, rank=None
     ):
 
-        config = DreamConfig.from_pretrained(
+        config = AutoConfig.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
         )
@@ -97,7 +97,7 @@ class S2SInference:
             chat_template=qwen2_chat_template,
         )
 
-        model = DreamModel.from_pretrained(
+        model = AutoModel.from_pretrained(
             model_name_or_path,
             trust_remote_code=True,
             device_map=device_map,
@@ -127,7 +127,7 @@ class S2SInference:
             audio_tokenizer_path,
             audio_tokenizer_type,
             flow_path=flow_path,
-            rank=audio_tokenizer_rank,
+            rank=rank,
         )
 
         self.model = model
@@ -311,7 +311,7 @@ if __name__ == "__main__":
     rank = torch.distributed.get_rank()
 
     s2s_inference = S2SInference(
-        args.model_name_or_path, args.audio_tokenizer_path, args.audio_tokenizer_type, flow_path=args.flow_path
+        args.model_name_or_path, args.audio_tokenizer_path, args.audio_tokenizer_type, flow_path=args.flow_path, rank=rank
     )
 
     # ================================================================

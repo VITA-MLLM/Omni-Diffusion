@@ -14,7 +14,7 @@ import torch
 import tqdm
 from datasets import load_dataset
 from tn.english.normalizer import Normalizer as EnNormalizer
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, AutoModel
 from transformers.generation import GenerationConfig
 
 import torchaudio
@@ -224,7 +224,7 @@ if __name__ == "__main__":
     random.seed(42)
     torch.manual_seed(42)
 
-    config = DreamConfig.from_pretrained(
+    config = AutoConfig.from_pretrained(
         args.model_name_or_path,
         trust_remote_code=True,
     )
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     )
     # print("tokenizer", tokenizer)
 
-    model = DreamModel.from_pretrained(
+    model = AutoModel.from_pretrained(
         args.model_name_or_path,
         trust_remote_code=True,
         device_map=device_map,
