@@ -930,7 +930,7 @@ def preprocess(
     labels_mask           = ~(labels == -100) 
     bsz, seq_len          = labels_mask.shape
     masked_indices, p_mask = forward_process(
-        bsz, seq_len, input_ids.device, labels,special_mask_ratio=0.6, special_token_id=mask_id
+        bsz, seq_len, input_ids.device, labels,special_mask_ratio=0.6, special_token_id=eos_id
     )
     final_masked_indices = masked_indices & labels_mask
     final_masked_indices_inv = (~masked_indices) & labels_mask
